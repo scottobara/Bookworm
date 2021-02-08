@@ -13,9 +13,13 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+        for _ in 0..<1 {
+            let newItem = Book(context: viewContext)
+            newItem.title = "Lord of the Rings"
+            newItem.author = "JRR Tolkien"
+            newItem.rating = 5
+            newItem.genre = "Fantasy"
+            newItem.review = "A classic!"
         }
         do {
             try viewContext.save()
