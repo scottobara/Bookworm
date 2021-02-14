@@ -19,10 +19,9 @@ struct DetailView: View {
         GeometryReader { geometry in
             VStack {
                 ZStack(alignment: .bottomTrailing) {
-                    Image(self.book.genre ?? "Fantasy")
+                    Image(((self.book.genre ?? "").isEmpty ? "Unknown" : self.book.genre)!)
                         .frame(maxWidth: geometry.size.width)
-
-                    Text(self.book.genre?.uppercased() ?? "FANTASY")
+                    Text(((self.book.genre ?? "").isEmpty ? "GENRE UNKNOWN" : self.book.genre?.uppercased())!)
                         .font(.caption)
                         .fontWeight(.black)
                         .padding(8)
@@ -75,7 +74,7 @@ struct DetailView_Previews: PreviewProvider {
         let book = Book(context: moc)
         book.title = "Test book"
         book.author = "Test author"
-        book.genre = "Fantasy"
+        book.genre = nil
         book.rating = 4
         book.review = "This was a great book; I really enjoyed it."
 
@@ -87,6 +86,6 @@ struct DetailView_Previews: PreviewProvider {
 
 //struct DetailView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        DetailView(book: <#Book#>).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext[0])
+//        DetailView(book: <#Book#>).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 //    }
 //}
